@@ -5,17 +5,13 @@ import App from "./App.vue";
 import router from "./router";
 import "bulma"; //!css library//
 import store from "./store";
+//!import date format from 
+import "./store/services/date_services"
 //import axios from "axios";
 
 Vue.config.productionTip = false;
 // import VueAxios from "vue-axios";
 Vue.use(VeeValidate);
-//axios.defaults.withCredentials = true;
-// const base = axios.create({
-//   baseURL: "http://localhost:3200/",
-// });
-
-//Vue.prototype.$http = base;
 
 new Vue({
   router,

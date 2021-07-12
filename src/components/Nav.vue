@@ -65,7 +65,7 @@
           <router-link to="/Posts">
             <span class="icon-text">
               <span class="icon">
-               <i class="fas fa-home"></i>
+                <i class="fas fa-home"></i>
               </span>
               <span>Feed</span>
             </span>
