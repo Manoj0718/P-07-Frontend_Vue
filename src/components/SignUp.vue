@@ -54,7 +54,7 @@
                   class="input is-success"
                   type="email"
                   v-model="user.user_email"
-                  v-validate="`required|min:3|max:255`"
+                  v-validate="`required|email`"
                   name="email"
                   placeholder="Email"
                 />
@@ -82,22 +82,6 @@
                 </span>
               </p>
             </div>
-            <!-- <div class="field">
-              <p class="control is-expanded has-icons-left has-icons-right">
-                <input
-                  class="input is-success"
-                  type="password"
-                  name="password"
-                  v-model="user.user_password_repeat"
-                  autocomplete="on"
-                  v-validate="`required|min:3|max:255`"
-                  placeholder="Password (repeat)"
-                />
-                <span class="icon is-small is-left">
-                  <i class="fas fa-lock"></i>
-                </span>
-              </p>
-            </div> -->
           </div>
         </div>
 
@@ -161,7 +145,6 @@
   </div>
 </template>
 
-
 <script>
 import User from "../store/modules/user";
 
@@ -183,7 +166,7 @@ export default {
   },
   mounted() {
     if (this.loggedIn) {
-      this.$toaster.success('You are now direct to Login Page');
+      this.$toaster.success("You are now direct to Login Page");
       this.$router.push("/user");
     }
   },
@@ -217,7 +200,6 @@ export default {
   },
 };
 </script>
-
 
 <style scoped>
 .home {

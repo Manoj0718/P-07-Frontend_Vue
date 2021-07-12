@@ -7,8 +7,10 @@
             <input
               v-model="user.user_email"
               class="input"
-              type="email"
+              type="text"
               placeholder="Email"
+              name="field"
+              v-validate="'required|email'"
             />
             <span class="icon is-small is-left">
               <i class="fas fa-envelope"></i>
@@ -45,7 +47,6 @@
             </button></router-link
           >
         </div>
-       
       </form>
     </div>
   </div>
@@ -75,13 +76,12 @@ export default {
   },
   methods: {
     handleLogin() {
-      // console.log(user, "user ");
       console.log(this.user);
       if (this.user.user_email && this.user.user_password) {
         this.$store.dispatch("auth/login", this.user).then(
           () => {
             this.$router.push("/Posts");
-            //this.$toaster.success("Hellow" + this.user.first_name);
+            this.$toaster.success("Hellow" + this.user.first_name);
           },
           (error) => {
             this.loading = false;
@@ -89,11 +89,9 @@ export default {
               (error.response && error.response.data) ||
               error.message ||
               error.toString();
-              //!Notification
-              this.$toaster.error(this.message.message);
+            //!Notification
+            this.$toaster.error(this.message.message);
             console.log("error here - ", this.message.message);
-            
-          
           }
         );
       }

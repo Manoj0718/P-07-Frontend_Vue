@@ -11,8 +11,7 @@ export default {
   name: "app",
   components: { Nav },
 
-
-//ToDO -  Handle to login session 
+  //ToDO -  Handle to login session
   // created : function () {
   //   this.$store.interceptors.response.use(undefined, function (err) {
   //     return new Promise(function (resolve, reject) {
