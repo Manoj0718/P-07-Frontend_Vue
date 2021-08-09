@@ -19,9 +19,9 @@ class AuthServices {
       )
       .then((responce) => {
         console.log("auth services responce", responce);
-        // console.log(responce.data.token, "token");
         if (responce.data.token) {
           localStorage.setItem("user", JSON.stringify(responce.data));
+          console.log("here id",responce.data.user.id);
         }
         return responce.data;
       });

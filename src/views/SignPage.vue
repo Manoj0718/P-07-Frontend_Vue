@@ -1,5 +1,6 @@
 <template>
   <div>
+    deleted
     <SignUp />
   </div>
 </template>
@@ -11,18 +12,3 @@ export default {
 };
 </script>
 
-<style scoped>
-template {
-  background: #4568dc; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #b06ab3,
-    #4568dc
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #b06ab3,
-    #4568dc
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
-</style>

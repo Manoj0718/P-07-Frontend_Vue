@@ -1,29 +1,24 @@
 <template>
-  <div class="home">
+<div class="container">
     <section class="hero is-fullheight">
-      <div class="hero-body container has-text-centered">
-        <div class="columns is-vcentered">
-          <div class="column is-8  is-size-1 has-text-light" id="typical">
-            <typical
-              :steps="['Hello', 1000, 'Hello Groupomania !! ', 2000]"
-              :wrapper="'h1'"
-            ></typical>
-            <typical
-              class="typicalWrapper"
-              :steps="[
+      <div class="hero-body has-text-centered">
+        <div class="tile is-parent">
+          <article class="tile is-child" id="typical">
+ <p class="title has-text-white is-size-2 has-text-left-desktop-only">
+            <typical :steps="['Hello', 1000, 'Hello Groupomania !! ', 2000]" :wrapper="'h1'"></typical>
+            <typical class="typicalWrapper" :steps="[
                 'A Place To',
                 3000,
                 'Know Your',
                 2500,
                 'Collegemates! 👋',
                 3000,
-              ]"
-              :loop="Infinity"
-              :wrapper="'h2'"
-            ></typical>
+              ]" :loop="Infinity" :wrapper="'h2'"></typical>
+ </p>
+          </article>
+          <div class="column">
+            <LoginCard />
           </div>
-
-          <LoginCard />
         </div>
       </div>
     </section>
@@ -31,25 +26,26 @@
 </template>
 
 <script>
-// import multiple components
-import typical from "vue-typical";
-import LoginCard from "../components/LoginCard";
+  // import multiple components
+  import typical from "vue-typical";
+  import LoginCard from "../components/LoginCard";
 
-export default {
-  components: { typical, LoginCard },
-};
+  export default {
+    components: {
+      typical,
+      LoginCard
+    },
+  };
 </script>
 
 <style lang="scss" scoped>
-.hero {
-  background-image: linear-gradient(
-      to bottom,
-      rgba(29, 29, 131, 0.021),
-      rgba(30, 20, 180, 0.534)
-    ),
-    url("../assets//home_background.jpg");
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
-}
+  .hero {
+    background-image: linear-gradient(to bottom,
+        rgba(31, 31, 39, 0.021),
+        rgba(32, 31, 36, 0.733)),
+      url("../assets//home_background.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+  }
 </style>

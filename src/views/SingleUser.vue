@@ -1,6 +1,5 @@
 <template>
-    <div>
-        Single User View
+    <div class="container mx-auto my-6">
 <UserPage />
 
     </div>
@@ -13,3 +12,10 @@ export default {
     components:{UserPage}
 }
 </script>
+
+
+<style scoped>
+.container {
+    height: 100vh;
+}
+</style>

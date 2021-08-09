@@ -1,8 +1,8 @@
-<template>
-  <div class="container">
+²<template>
+  <div class="container mx-auto px-2 ">
     <div class="field" v-if="user">
-      <label class="label">User Name</label>
-      <div class="control">
+      <label class="label has-text-white">User Name</label>
+      <div class="control my-2">
         <input
           class="input"
           type="text"
@@ -10,8 +10,8 @@
           v-model="user.first_name"
         />
       </div>
-      <label class="label">Last Name</label>
-      <div class="control">
+      <label class="label has-text-white">Last Name</label>
+      <div class="control my-2">
         <input
           class="input"
           type="text"
@@ -19,8 +19,8 @@
           v-model="user.last_name"
         />
       </div>
-      <label class="label">Hobbies</label>
-      <div class="control">
+      <label class="label has-text-white">Hobbies</label>
+      <div class="control my-2">
         <input
           class="input"
           type="text"
@@ -28,8 +28,8 @@
           v-model="user.user_hobbies"
         />
       </div>
-      <label class="label">Bio</label>
-      <div class="control">
+      <label class="label has-text-white ">Bio</label>
+      <div class="control my-2">
         <input
           class="input"
           type="text"
@@ -38,11 +38,11 @@
         />
       </div>
       <!-- -------------------------- -->
-      <div class="form-group">
-        <label class="label">status</label>
+      <div class="form-group has-text-white mt-4">
+        <label class="label has-text-white">status</label>
         {{ user.published ? "Published" : "Pending" }}
       </div>
-      <div class="buttons">
+      <div class="buttons mt-2 is-justify-content-center"> 
         <button
           class="button is-info"
           v-if="user.published"
@@ -59,11 +59,11 @@
         <button class="button is-info" type="submit" @click="updateNow">
           update
         </button>
-        <p>{{ message }}</p>
+        <p class="has-text-white">{{ message }}</p>
       </div>
     </div>
     <div v-else>
-      <p>No User data Here</p>
+      <p class="has-text-white">No User data Here</p>
     </div>
   </div>
 </template>
@@ -78,8 +78,11 @@ export default {
       message: "",
     };
   },
+
+  
   methods: {
     getSingleUser(id) {
+      // console.log("here",req.body);
       UserModifyFunction.getSingleUser(id)
         .then((res) => {
           this.user = res.data;
@@ -143,3 +146,14 @@ export default {
   },
 };
 </script>
+
+
+<style scoped>
+@media screen and (min-width:769px) {
+    .container {
+      width: 50%;
+    }}
+
+    
+
+</style>

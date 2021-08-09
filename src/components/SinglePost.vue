@@ -1,20 +1,21 @@
 <template>
-  <div class="container">
+  <div class="container px-2">
+<form enctype="multipart/form-data" id="form">
     <div class="field" v-if="post">
-      <label class="label">Title</label>
+      <label class="label has-text-white">Title</label>
       <div class="control">
         <input class="input" type="text" placeholder="Text input" v-model="post.title" />
       </div>
-      <label class="label">content</label>
+      <label class="label has-text-white">content</label>
       <div class="control">
         <input class="input" type="text" placeholder="Text input" v-model="post.content" />
       </div>
       <div>
         <figure class="image is-4by3 mx-auto">
-          <img :src="post.imageUrl" alt="Placeholder image" />
+          <img :src="post.imageUrl" alt="Placeholder image" id="image"/>
         </figure>
       </div>
-      <div class="file is-boxed">
+      <div class="file is-boxed is-justify-content-center py-2">
         <label class="file-label">
           <input class="file-input" type="file" @change="onFileSelected">
           <span class="file-cta">
@@ -30,29 +31,35 @@
 
       <!-- -------------------------- -->
 
-      <div class="form-group">
+      
+
+      <!-- //* here buttons appear only for creator// -->
+      <!-- <div class="form-group">
         <label class="label">status</label>
         {{ post.published ? "Published" : "Pending" }}
-      </div>
-      <div class="buttons">
-        <button class="button is-info" v-if="post.published" @click="updatePublished(false)">
-          Not Published
+      </div> -->
+      <div class="buttons is-justify-content-center" v-if="NowUser.user.id==post.userId">
+        <button class="button is-info"  @click="updateButton">
+    Update
         </button>
 
-        <button v-else class="button is-success" @click="updatePublished(true)">
+        <!-- <button v-else class="button is-success" @click="updatePublished(true)">
           Update Post
-        </button>
-        <button class="button is-danger" @click="deletePost">Delete</button>
+        </button> -->
+        <button class="button is-danger" @click.prevent="deletePost">Delete</button>
+  
         <!-- <button class="button is-info" type ="submit" @click="updateingPost">update</button>  -->
         <p>{{ message }}</p>
       </div>
+      <div v-else><p class="has-text-white">Sorry! You are not allowed to perform this event.</p></div>
       <p>post id - {{ post.id }}</p>
 
-      <p>created by - user - {{ post.userId }}</p>
+      <p>created by - user - {{ post.userId }}    login user - {{NowUser.user.id}} </p>
     </div>
     <div v-else>
       <p>click post</p>
     </div>
+    </form>
   </div>
 </template>
 
@@ -60,13 +67,22 @@
   import UserService from "../store/services/user_services";
   export default {
     name: "SinglePost",
+
+    // //ToDO - computed need to be above data?? otherwise user data took , post creaters data???,,//
+    computed: {
+      NowUser() {
+        return this.$store.state.auth.user;
+      },
+    },
     data() {
       return {
-        post: null,
-        fileUpdated: false,
-        message: " ",
-        //image:null,
-      };
+        post:{
+          id:this.$route.params.postId,
+          title:"",
+          content:"",
+imageUrl:null,
+        } 
+    };
     },
     methods: {
       getSinglePost(id) {
@@ -80,54 +96,102 @@
           });
       },
       //-------//ToDo - here need to add image -----------
-      onFileSelected(event) {
-        try {
-          this.fileUpdated = true;
+ onFileSelected(event) {
+      try {
+          //this.fileUpdated = true;
+          //this.file = event.target.files[0];
+          //this.file = this.$refs.fileInput.files[0]
           this.file = event.target.files[0];
-          //this.post.imageUrl = file;
-          //this.image = URL.createObjectURL(file);
-          console.log("clicked", this.file);
+    console.log("clciked", this.file);
+        
         } catch (error) {
           return error;
         }
-      },
-
-      //-------//ToDo - block-----------
-      updatePublished(status) {
-        let formData = new FormData();
-        formData.set("id", this.post.id);
+    },
+    updateButton() {
+      console.log('clciked')
+      try {
+        const formData = new FormData();
+        formData.set("id",this.post.id);
+        formData.append("image", this.file);
         formData.set("title", this.post.title);
         formData.set("content", this.post.content);
-        if (this.fileUpdated) {
-          formData.append("image", this.file, this.file.name);
-        }
+        //formData.append('_method', 'PUT')
+//! dispalya FormData() keys============//
+console.log("formdata",formData);
+for (let pair of formData.entries()) {
+    console.log(pair[0]+ ', ' + pair[1]); 
+}
 
-        console.log("formdata", formData)
+        UserService.update(this.post.id,formData).then((result) => {
+         // console.log("show",result);
+          console.log(result.data.post);
 
-        // published: status,   
-        UserService.updatePost(formData)
-          .then((res) => {
-            this.post.published = status;
-            console.log(" update post data", res.data);
-            console.log(this.post.published);
-            this.message = "The Post Was Updated.";
+        });
+      } catch (err) {
+        console.log("error here ",err);
+        return err;
+      }
+    },
 
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      },
-      // updateingPost(){
-      //    console.log("clciked");
-      //   //  //! argument id (id,data) in userservices, same order need to follow
-      //    UserService.updatePost(this.post.id,this.post).then(responce=>{
-      //      console.log(responce.data,'update click');
-      //      this.message = "The Post Was Updated."
-      //    }).catch(error=>{
-      //      console.log(error);
-      //      return error;
-      //    });
-      //  },
+
+
+
+
+
+
+
+
+
+
+
+      // onFileSelected(event) {
+      //   try {
+      //     this.fileUpdated = true;
+      //     this.file = event.target.files[0];
+      //     console.log("clciked", this.file);
+        
+      //   } catch (error) {
+      //     return error;
+      //   }
+      // },
+
+      // //-------//ToDo - block-----------
+      // updateButton() {
+      //   console.log("check",this.post.id);
+      //   console.log("citle",this.post.title);
+      //    console.log("cont",this.post.content);
+      //   console.log("image",this.file);
+
+      //   let formData = new FormData();
+        
+      //   formData.append("id", this.post.id);
+      //   formData.append("title", this.post.title);
+        
+      //   formData.append("content", this.post.content);
+      //   formData.append('image', this.file);
+      //   console.log("image",this.file);
+      //   formData.append('_method', 'PUT')
+      //   //  if (this.fileUpdated) {
+      //   //   formData.append("image", this.file, this.file.name);
+      //   // .append('_method', 'PUT')
+      //   //  }
+
+      //   console.log("formdata", formData);
+
+      //   // published: status,   
+      //   UserService.updatePost(this.post.id)
+      //     .then((res) => {
+      // this.post.title = res.data.title;
+      //       console.log(" update post data", res.data.title);
+      //       this.message = "The Post Was Updated.";
+
+      //     })
+      //     .catch((error) => {
+      //       console.log(error);
+      //     });
+      // },
+      
       deletePost() {
         UserService.delete(this.post.id)
           .then((res) => {
@@ -145,7 +209,21 @@
       this.message = "";
       //? params: { postId: post.post_id }} u have to use same params in view page
       this.getSinglePost(this.$route.params.postId);
+      console.log("data", this.$route.params.postId);
 
     },
   };
 </script>
+
+<style scoped>
+@media screen and (min-width:769px) {
+    .container {
+      width: 50%;
+    }}
+  
+    #image {
+      height:60%;
+      width: 50%;
+     margin:auto;
+    }
+</style>

@@ -1,22 +1,23 @@
 <template>
-  <div v-if="!submitted">
-    <div class="field">
+  <div v-if="!submitted" class="container px-2">
+    <div class="field mt-6">
+       <label class="label has-text-white">Title</label>
       <input
         class="input"
         type="text"
-        placeholder="title"
         v-model="post.title"
       />
     </div>
     <div class="field">
+        <label class="label has-text-white">content</label>
       <input
         class="input"
         type="text"
         v-model="post.content"
-        placeholder="content"
+       
       />
     </div>
-    <div class="file is-boxed">
+    <div class="file is-boxed is-justify-content-center py-2 ">
       <label class="file-label">
         <input class="file-input" type="file" @change="onFileSelected" />
         <span class="file-cta">
@@ -29,17 +30,17 @@
         </span>
       </label>
     </div>
-    <div class="control">
-      <button class="button is-primary" @click.prevent="savePost">
+    <div class="control mx-auto mt-2">
+      <button class="button is-primary" @click.prevent="savePost" @keydown.enter="savePost">
         Submit
       </button>
     </div>
   </div>
   <div v-else>
-    <h2>
+    <h3 class="has-text-white">
       You Created New Post. You want to Create Another post ? Then Click The Add
       Button.
-    </h2>
+    </h3>
     <button class="button is-primary" @click.prevent="newPost">Add</button>
   </div>
 </template>
@@ -72,7 +73,12 @@ export default {
       formData.set("content", this.post.content);
       formData.append("image", this.file, this.file.name);
 
-      console.log("formdata", formData);
+      console.log("formdata", formData.tile);
+      
+console.log("formdata",formData);
+for (let pair of formData.entries()) {
+    console.log(pair[0]+ ', ' + pair[1]); 
+}
 
       UserServices.createPost(formData)
         .then((result) => {
@@ -91,6 +97,16 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+@media screen and (min-width:769px) {
+    .container {
+      width: 50%;
+    }}
+.container{
+  height: 100vh;
+}
+</style>
 
 //* resources - // upload file - //
 https://serversideup.net/uploading-files-vuejs-axios/ //
