@@ -1,7 +1,6 @@
 <template>
   <div class="container">
     <article class="media " v-for="comment in comments" v-bind:key="comment.comment_id">
-      <!-- <article class="media"> -->
       <figure class="media-left">
         <p class="image is-64x64">
           <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png" />
@@ -66,7 +65,6 @@
     //-------//ToDo - block-----------
     // here i want to update my commentList when someone commented.
     methods: {
-
       deleteComment() {
         console.log("clicked", this.comment_id);
         CommentServices.deleteComment(this.comment_id).then((response) => {
@@ -83,27 +81,12 @@
           body: this.data.body,
 
         };
-
-        this.$validator.validate().then((isValid) => {
-          if (isValid && newComment.body !== "") {
-            CommentServices.postComment(newComment).then((result) => {
-              console.log(result);
-
-            }).catch((errror) => {
-              console.log(errror);
-              //? handle notification
-              this.$toaster.error("Your Comment can not post");
-
-            })
-          }
-        })
         this.comments.push(newComment);
         this.data.body = "";
       },
     },
 
   }
-
 
 
   // --- //ToDo - works
