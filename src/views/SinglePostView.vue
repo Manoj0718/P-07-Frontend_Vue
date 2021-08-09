@@ -1,6 +1,5 @@
 <template>
 <div>
-    <h1>single User View</h1>
      <SinglePost />
 </div>
 
@@ -14,3 +13,4 @@ export default {
     components:{SinglePost},
 }
 </script>
+

@@ -18,13 +18,17 @@ class UserService {
     return axios.post(API_URL +"posts",data,{ headers: authHeader() })
   }
   // -- //! used patch backend , then frontend also need to be same.
-  updatePost(id, data){
+  update(id,data ){
+    return axios.put(API_URL + `posts/${id}`,data,{headers:authHeader()} );
    // return axios.put(API_URL+`posts/${id}`,data,{ headers: authHeader() });
-    return axios.put(API_URL+`posts/${id}`,data,{ headers: authHeader() });
+    // return axios.put(API_URL+`posts/${id}`,data,{ headers: authHeader() });
     
   }
   delete(id){
     return axios.delete(API_URL+`posts/${id}`,{headers: authHeader()});
+  }
+  markPost(data){
+    return axios.post(API_URL +"posts/post_has_seen",data,{ headers: authHeader() })
   }
 
 }
