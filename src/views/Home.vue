@@ -42,7 +42,7 @@
   .hero {
     background-image: linear-gradient(to bottom,
         rgba(31, 31, 39, 0.021),
-        rgba(32, 31, 36, 0.733)),
+        #4F56A2),
       url("../assets//home_background.jpg");
     background-size: cover;
     background-position: center;

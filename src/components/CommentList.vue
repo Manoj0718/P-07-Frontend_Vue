@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <article class="media " v-for="comment in comments" v-bind:key="comment.comment_id">
+    <article class="media " v-for="comment in post.comments" v-bind:key="comment.comment_id">
       <figure class="media-left">
         <p class="image is-64x64">
           <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png" />
@@ -8,11 +8,11 @@
       </figure>
       <div class="media-content">
         <div class="content">
-          <p>
+          <p class="has-text-white-ter">
             {{ comment.commented_by }}
             <strong></strong>
             <br />
-            {{ comment.content }}||{{comment.comment_id}}
+            {{ comment.content }}
 
             <br />
             <small>
@@ -32,27 +32,28 @@
         </div>
       </div>
     </article>
-    <textarea class="textarea" name="text" placeholder="Add a comment..." v-model="data.body"></textarea>
+    <!-- <textarea class="textarea" name="text" placeholder="Add a comment..." v-model="data.body"></textarea> -->
     <!-- v-validate="`required|min:3|max:255`"  -->
-    <div>
+    <!-- <div>
       <button @click="saveComment">Save</button>
       <button>Cancel</button>
-    </div>
+    </div> -->
 
-    <!-- <Comments @commentcreated="addComment" :post_id="list.post_id" /> -->
+    <Comments comments="comment" :postId="postId" />
   </div>
 </template>
 
 <script>
-  //import Comments from "../components/Comments.vue";
+  import Comments from "../components/Comments.vue";
   import CommentServices from '../store/services/comments_services';
 
   export default {
     name: "CommentList",
-    props: ["comments", "post_id", "post"],
-    // components: {
-    //   Comments
-    // },
+    components: {
+      Comments
+    },
+    props: ["post", "postId"],
+
     //* i'm useing props , and iterate data from there to display in my paga//
     data() {
 
@@ -76,14 +77,14 @@
         })
 
       },
-      saveComment() {
-        let newComment = {
-          body: this.data.body,
+      // saveComment() {
+      //   let newComment = {
+      //     body: this.data.body,
 
-        };
-        this.comments.push(newComment);
-        this.data.body = "";
-      },
+      //   };
+      //   this.comments.push(newComment);
+      //   this.data.body = "";
+      // },
     },
 
   }
@@ -119,19 +120,5 @@
 <style scoped>
   .container {
     min-width: 100%;
-    background-color: rgba(255, 255, 255, 0.95);
-    border-radius: 5px;
-    color: #333;
-    font-family: system-ui, sans-serif;
-    line-height: 1.5;
-    padding: 1rem 2rem;
-  }
-
-  @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
-    .container {
-      -webkit-backdrop-filter: blur(10px);
-      backdrop-filter: blur(10px);
-      background-color: rgba(255, 255, 255, 0.5);
-    }
   }
 </style>

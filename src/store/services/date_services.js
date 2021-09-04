@@ -11,6 +11,6 @@ import Moment from "moment";
 Vue.filter("displayDate", function (value) {
     return Moment(value).startOf('day').fromNow();
 });
- Vue.filter("displayTime",function (value) {
-     return Moment(value).endOf('day').fromNow()
- });
+Vue.filter("displayTime", function (value) {
+    return Moment(value).endOf('day').fromNow()
+});

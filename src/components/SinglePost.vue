@@ -1,12 +1,12 @@
 <template>
-  <div class="container px-2">
+  <div class="container has-background-black-bis mt-2 p-1">
     <form enctype="multipart/form-data" id="form">
       <div class="field" v-if="post">
-        <label class="label has-text-white">Title</label>
+        <label class="label  is-family-code has-text-weight-medium has-text-white">Title</label>
         <div class="control">
           <input class="input" type="text" placeholder="Text input" v-model="post.title" />
         </div>
-        <label class="label has-text-white">content</label>
+        <label class="label  is-family-code has-text-weight-medium has-text-white ">content</label>
         <div class="control">
           <input class="input" type="text" placeholder="Text input" v-model="post.content" />
         </div>
@@ -29,34 +29,21 @@
           </label>
         </div>
 
-        <!-- -------------------------- -->
+        <!-- //* here buttons appear only for creator//  -->
 
-
-
-        <!-- //* here buttons appear only for creator// -->
-        <!-- <div class="form-group">
-        <label class="label">status</label>
-        {{ post.published ? "Published" : "Pending" }}
-      </div> -->
         <div class="buttons is-justify-content-center" v-if="NowUser.user.id==post.userId">
-          <button class="button is-info" @click="updateButton">
+          <button class="button is-info  is-family-code has-text-weight-medium" @click="updateButton">
             Update
           </button>
 
-          <!-- <button v-else class="button is-success" @click="updatePublished(true)">
-          Update Post
-        </button> -->
-          <button class="button is-danger" @click.prevent="deletePost">Delete</button>
-
-          <!-- <button class="button is-info" type ="submit" @click="updateingPost">update</button>  -->
+          <button class="button is-danger  is-family-code has-text-weight-medium"
+            @click.prevent="deletePost">Delete</button>
           <p>{{ message }}</p>
         </div>
         <div v-else>
-          <p class="has-text-white">Sorry! You are not allowed to perform this event.</p>
+          <p class=" is-family-code has-text-weight-medium has-text-white ">Sorry! You are not allowed to perform this
+            event.</p>
         </div>
-        <p>post id - {{ post.id }}</p>
-
-        <p>created by - user - {{ post.userId }} login user - {{NowUser.user.id}} </p>
       </div>
       <div v-else>
         <p>click post</p>
@@ -69,13 +56,13 @@
   import UserService from "../store/services/user_services";
   export default {
     name: "SinglePost",
-
-    // //ToDO - computed need to be above data?? otherwise user data took , post creaters data???,,//
+    //* check now logging user //
     computed: {
       NowUser() {
         return this.$store.state.auth.user;
       },
     },
+
     data() {
       return {
         post: {
@@ -86,6 +73,7 @@
         }
       };
     },
+
     methods: {
       getSinglePost(id) {
         UserService.getPost(id)
@@ -97,12 +85,10 @@
             console.log(error);
           });
       },
-      //-------//ToDo - here need to add image -----------
+      //* - here add image//
+
       onFileSelected(event) {
         try {
-          //this.fileUpdated = true;
-          //this.file = event.target.files[0];
-          //this.file = this.$refs.fileInput.files[0]
           this.file = event.target.files[0];
           console.log("clciked", this.file);
 
@@ -110,23 +96,25 @@
           return error;
         }
       },
+
       updateButton() {
-        console.log('clciked')
+        console.log('clciked');
         try {
           const formData = new FormData();
           formData.set("id", this.post.id);
           formData.append("image", this.file);
           formData.set("title", this.post.title);
           formData.set("content", this.post.content);
-          //formData.append('_method', 'PUT')
-          //! dispalya FormData() keys============//
-          console.log("formdata", formData);
+
+          //! you can check form data following way- FormData() keys============//
+
+          console.log("formdata full 123", formData);
+
+          //? Here i'm checking the formdata details
           for (let pair of formData.entries()) {
             console.log(pair[0] + ', ' + pair[1]);
           }
-
           UserService.update(this.post.id, formData).then((result) => {
-            // console.log("show",result);
             console.log(result.data.post);
 
           });
@@ -135,64 +123,6 @@
           return err;
         }
       },
-
-
-
-
-
-
-
-
-
-
-
-
-      // onFileSelected(event) {
-      //   try {
-      //     this.fileUpdated = true;
-      //     this.file = event.target.files[0];
-      //     console.log("clciked", this.file);
-
-      //   } catch (error) {
-      //     return error;
-      //   }
-      // },
-
-      // //-------//ToDo - block-----------
-      // updateButton() {
-      //   console.log("check",this.post.id);
-      //   console.log("citle",this.post.title);
-      //    console.log("cont",this.post.content);
-      //   console.log("image",this.file);
-
-      //   let formData = new FormData();
-
-      //   formData.append("id", this.post.id);
-      //   formData.append("title", this.post.title);
-
-      //   formData.append("content", this.post.content);
-      //   formData.append('image', this.file);
-      //   console.log("image",this.file);
-      //   formData.append('_method', 'PUT')
-      //   //  if (this.fileUpdated) {
-      //   //   formData.append("image", this.file, this.file.name);
-      //   // .append('_method', 'PUT')
-      //   //  }
-
-      //   console.log("formdata", formData);
-
-      //   // published: status,   
-      //   UserService.updatePost(this.post.id)
-      //     .then((res) => {
-      // this.post.title = res.data.title;
-      //       console.log(" update post data", res.data.title);
-      //       this.message = "The Post Was Updated.";
-
-      //     })
-      //     .catch((error) => {
-      //       console.log(error);
-      //     });
-      // },
 
       deletePost() {
         UserService.delete(this.post.id)
@@ -221,6 +151,12 @@
   @media screen and (min-width:769px) {
     .container {
       width: 50%;
+    }
+  }
+
+  @media screen and (max-width:769px) {
+    .container {
+      height: 90vh;
     }
   }
 

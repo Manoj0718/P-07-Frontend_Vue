@@ -9,16 +9,28 @@ import AuthService from "../services/auth-services";
 
 const user = JSON.parse(localStorage.getItem("user"));
 //? here checking the status//
-const initialState = user
-  ? { status: { loggedIn: true }, user }
-  : { status: { loggedIn: false }, user: null };
+const initialState = user ?
+  {
+    status: {
+      loggedIn: true
+    },
+    user
+  } :
+  {
+    status: {
+      loggedIn: false
+    },
+    user: null
+  };
 
 export const auth = {
   namespaced: true,
   state: initialState,
   //! actions are trigger with dispatch method
   actions: {
-    login({ commit }, user) {
+    login({
+      commit
+    }, user) {
       return AuthService.login(user).then(
         (user) => {
           commit("loginSuccess", user);
@@ -31,11 +43,15 @@ export const auth = {
         }
       );
     },
-    logout({ commit }) {
+    logout({
+      commit
+    }) {
       AuthService.logout();
       commit("logout");
     },
-    register({ commit }, user) {
+    register({
+      commit
+    }, user) {
       return AuthService.register(user).then(
         (response) => {
           commit("registerSuccess");

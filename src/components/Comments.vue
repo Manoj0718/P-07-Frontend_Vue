@@ -1,11 +1,6 @@
 <template>
-  <div class>
+  <div class="container">
     <article class="media">
-      <figure class="media-left">
-        <p class="image is-64x64">
-          <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png" alt="home" />
-        </p>
-      </figure>
       <div class="media-content">
         <div class="field">
           <p class="control">
@@ -13,8 +8,8 @@
               v-model.trim="comment.content"></textarea>
 
             <!-- //*corresponding keyboard handler. -->
-            <button class="button" @click.prevent="addComment()" @keydown.enter="addComment()">
-              Post comment
+            <button class="button my-2" @click.prevent="addComment()" @keydown.enter="addComment()">
+              Save
             </button>
           </p>
         </div>
@@ -27,7 +22,7 @@
   import CommentServices from "../store/services/comments_services";
 
   export default {
-    props: ["post_id"],
+    props: ["comments", "postId"],
     name: "Comments",
     data() {
       return {
@@ -43,7 +38,7 @@
     methods: {
       addComment() {
         let newData = {
-          postId: this.post_id,
+          postId: this.postId,
           content: this.comment.content,
         };
         this.$validator.validate().then((isValid) => {
