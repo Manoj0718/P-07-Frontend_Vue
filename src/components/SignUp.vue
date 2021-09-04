@@ -1,15 +1,10 @@
 <template>
   <div class="container">
-    <section class="section">
-      <figure class="image is-128x128">
-        <img src="../assets/icon-left-font-monochrome-white.png" />
-      </figure>
-    </section>
     <section class="section" id="signup_form">
       <form name="form" @submit.prevent="handleRegister" @keydown.enter="handleRegister">
         <div class="field is-horizontal">
           <div class="field-label is-normal">
-            <label class="label has-text-white">Name</label>
+            <label class="label is-family-code has-text-weight-medium has-text-white">Name</label>
           </div>
           <div class="field-body">
             <div class="field">
@@ -58,7 +53,7 @@
 
         <div class="field is-horizontal">
           <div class="field-label is-normal">
-            <label class="label has-text-white">Hobbies</label>
+            <label class="label is-family-code has-text-weight-medium has-text-white">Hobbies</label>
           </div>
           <div class="field-body">
             <div class="field">
@@ -72,15 +67,15 @@
 
         <div class="field is-horizontal">
           <div class="field-label is-normal">
-            <label class="label has-text-white">Bio</label>
+            <label class="label is-family-code has-text-weight-medium has-text-white">Bio</label>
           </div>
           <div class="field-body">
             <div class="field">
               <div class="control">
                 <textarea class="textarea" name="text" type="text" v-model="user.user_bio"
                   v-validate="`required|min:3|max:255`" placeholder="Tell us about you."></textarea>
-                  <p> {{characterCount}}/255</p>
-                  
+                <p class="is-family-code has-text-weight-medium has-text-white"> {{characterCount}}/255</p>
+
               </div>
             </div>
           </div>
@@ -93,7 +88,7 @@
           <div class="field-body">
             <div class="field">
               <div class="control">
-                <p class="has-text-danger-dark" v-if="message">{{ message }}</p>
+                <p class="is-family-code has-text-weight-medium has-text-white" v-if="message">{{ message }}</p>
                 <button class="button" :disabled="user.user_bio===0">Register</button>
               </div>
             </div>
@@ -122,7 +117,7 @@
       loggedIn() {
         return this.$store.state.auth.status.loggedIn;
       },
-      characterCount(){
+      characterCount() {
         return this.user.user_bio.length;
       },
 
@@ -166,24 +161,27 @@
 </script>
 
 <style scoped>
+  .container {
+    height: 100vh;
+  }
+
   #signup_form {
     background-color: rgba(255, 255, 255, 0.95);
     border-radius: 5px;
     color: #333;
     font-family: system-ui, sans-serif;
     line-height: 1.5;
-    max-width: 90%;
+    width: 90%;
     max-height: 90vh;
-    padding: 1rem 2rem;
   }
 
   @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
     #signup_form {
-      -webkit-backdrop-filter: blur(10px);
-      /* backdrop-filter: blur(10px); */
-      backdrop-filter: none;
-      background-color: rgba(4, 245, 84, 0.623);
-      backdrop-filter: brightness(100%);
+      backdrop-filter: blur(10px) saturate(200%);
+      -webkit-backdrop-filter: blur(10px) saturate(200%);
+      background-color: rgba(79, 86, 162, 0.5);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.125);
     }
   }
 
@@ -197,14 +195,38 @@
     background-size: cover;
     display: grid;
     place-items: center;
-    /* height: 100vh; */
+    height: 100vh;
   }
+
   @media screen and (min-width:769px) {
     .container {
       height: 100vh;
-    }}
+    }
+  }
 
-  figure {
-    margin: auto;
+  button {
+    background-image: linear-gradient(to right,
+        #08F856 0%,
+        #00ff55 51%,
+        #000000cb 100%);
+  }
+
+  button {
+    margin: 10px;
+    padding: 15px 45px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: rgb(255, 255, 255);
+    box-shadow: 0 0 20px rgb(48, 255, 7);
+    border-radius: 10px;
+  }
+
+  button:hover {
+    background-position: right center;
+    /* change the direction of the change here */
+    color: rgb(39, 245, 12);
+    text-decoration: none;
   }
 </style>

@@ -3,13 +3,10 @@
     <div class="m-2">
       <form name="form" @submit.prevent="handleLogin">
         <div class="field">
-
           <div class="control my-5">
-                <p class="has-text-white" v-if="message">
-                 {{  message }}</p> </div>
-
-
-
+            <p class="has-text-white" v-if="message">
+              {{  message }}</p>
+          </div>
           <p class="control has-icons-left has-icons-right">
             <input v-model="user.user_email" class="input" type="text" placeholder="Email" name="field"
               v-validate="'required|email'" />
@@ -51,24 +48,27 @@
         message: " ",
       };
     },
+
     computed: {
       loggedIn() {
         return this.$store.state.auth.status.loggedIn;
       },
     },
+
     created() {
       if (this.loggedIn) {
         //show posts here
         this.$router.push("/Posts");
       }
     },
+
     methods: {
       handleLogin() {
         if (this.user.user_email && this.user.user_password) {
           this.$store.dispatch("auth/login", this.user).then(
             () => {
               this.$router.push("/Posts");
-              this.$toaster.success("Hellow" + this.user.first_name);
+              // this.$toaster.success("Hellow" + this.user.first_name);
             },
             (error) => {
               this.loading = false;

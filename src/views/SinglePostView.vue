@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="container">
      <SinglePost />
 </div>
 
@@ -13,4 +13,8 @@ export default {
     components:{SinglePost},
 }
 </script>
+
+<style scoped>
+
+</style>
 

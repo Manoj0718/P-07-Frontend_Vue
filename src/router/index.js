@@ -5,12 +5,14 @@ import Home from "../views/Home.vue";
 Vue.use(VueRouter);
 //* ----- vue notification part------//
 import Toaster from 'v-toaster'
- 
+
 // You need a specific loader for CSS files like https://github.com/webpack/css-loader
 import 'v-toaster/dist/v-toaster.css'
- 
+
 // optional set default imeout, the default is 10000 (10 seconds).
-Vue.use(Toaster, {timeout: 5000})
+Vue.use(Toaster, {
+  timeout: 5000
+})
 //* -----  End of vue notification part------//
 const routes = [
   //!removeing # in the url path
@@ -27,7 +29,7 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
+      import( /* webpackChunkName: "about" */ "../views/About.vue"),
   },
   {
     path: "/signUp",

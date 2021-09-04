@@ -11,8 +11,7 @@ class AuthServices {
     //console.log(" insie AuthServices");
     return axios
       .post(
-        Api_URL + "login",
-        {
+        Api_URL + "login", {
           user_email: user.user_email,
           user_password: user.user_password,
         },
@@ -21,14 +20,14 @@ class AuthServices {
         console.log("auth services responce", responce);
         if (responce.data.token) {
           localStorage.setItem("user", JSON.stringify(responce.data));
-          console.log("here id",responce.data.user.id);
+          console.log("here id", responce.data.user.id);
         }
         return responce.data;
       });
   }
   logout() {
     localStorage.removeItem("user");
-    
+
   }
   register(user) {
     return axios.post(Api_URL + "signup", {
@@ -40,6 +39,6 @@ class AuthServices {
       user_bio: user.user_bio,
     });
   }
-  
+
 }
 export default new AuthServices();
