@@ -6,7 +6,8 @@
     </div>
     <div class="field">
       <label class="label  is-family-code has-text-weight-medium has-text-white ">content</label>
-      <input class="input" type="text" v-model="post.content" />
+      <textarea class="textarea" v-model="post.content"  type='text'> </textarea>
+      
     </div>
     <div class="file is-boxed is-justify-content-center py-2 ">
       <label class="file-label">

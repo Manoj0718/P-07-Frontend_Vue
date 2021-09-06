@@ -1,5 +1,5 @@
 <template>
-  <div class="container has-background-black-bis mt-2 p-1">
+  <div class="container mt-2 p-1">
     <form enctype="multipart/form-data" id="form">
       <div class="field" v-if="post">
         <label class="label  is-family-code has-text-weight-medium has-text-white">Title</label>
@@ -151,12 +151,14 @@
   @media screen and (min-width:769px) {
     .container {
       width: 50%;
+        background-color: #4F56A2;
     }
   }
 
   @media screen and (max-width:769px) {
     .container {
       height: 90vh;
+        background-color: #4F56A2;
     }
   }
 

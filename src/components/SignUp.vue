@@ -75,7 +75,6 @@
                 <textarea class="textarea" name="text" type="text" v-model="user.user_bio"
                   v-validate="`required|min:3|max:255`" placeholder="Tell us about you."></textarea>
                 <p class="is-family-code has-text-weight-medium has-text-white"> {{characterCount}}/255</p>
-
               </div>
             </div>
           </div>
@@ -133,6 +132,7 @@
       handleRegister() {
         this.message = " ";
         this.submitted = true;
+        //* useing validator for protection **//
         this.$validator.validate().then((isValid) => {
           if (isValid) {
             //! actions are trigger with dispatch method

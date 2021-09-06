@@ -5,9 +5,9 @@
         <div class="media">
           <router-link :to="{ name: 'user', params: { userId: item.userId } }">
             <div class="media-content-left" id="user_details">
-              <p class="is-size-3-desktop is-size-5-mobile is-family-code has-text-weight-medium has-text-white">
+              <h5 class="is-size-3-desktop is-size-5-mobile is-family-code has-text-weight-medium has-text-white">
                 {{ item.post_creater_last_name }} {{ item.post_creater_first_name}}
-              </p>
+              </h5>
             </div>
           </router-link>
         </div>
@@ -35,7 +35,7 @@
               v-bind:key="item.post_id" />
 
             <!-- ------------------ //! here statrt the post comments ------------------- -->
-            <CommentList v-bind:post="item" :postId="item.post_id" />
+            <!-- <CommentList v-bind:post="item" :postId="item.post_id" /> -->
             <!-- //* here finish the post comments -->
             <!-- //?comment section -->
             <!-- //* try to use props. -->
@@ -50,13 +50,13 @@
 // //* we use method , when we need to chage data, When we want to change the
 //* the presentation of the existing data, we use computed property.
 <script>
-  import CommentList from "../components/CommentList";
+  //import CommentList from "../components/CommentList";
   import UserService from "../store/services/user_services";
   import CheckBoxForPost from "../components/CheckBoxForPost.vue";
 
   export default {
     components: {
-      CommentList,
+     // CommentList,
       CheckBoxForPost
     },
     name: "Post",
