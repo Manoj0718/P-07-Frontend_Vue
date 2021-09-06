@@ -1,12 +1,12 @@
 <template>
-<div class="container">
+  <div class="container">
     <section class="hero is-fullheight">
       <div class="hero-body has-text-centered">
         <div class="tile is-parent">
           <article class="tile is-child" id="typical">
- <p class="title has-text-white is-size-2 has-text-left-desktop-only">
-            <typical :steps="['Hello', 1000, 'Hello Groupomania !! ', 2000]" :wrapper="'h1'"></typical>
-            <typical class="typicalWrapper" :steps="[
+            <p class="title has-text-white is-size-2 has-text-left-desktop-only">
+              <typical :steps="['Hello', 1000, 'Hello Groupomania !! ', 2000]" :wrapper="'h1'"></typical>
+              <typical class="typicalWrapper" :steps="[
                 'A Place To',
                 3000,
                 'Know Your',
@@ -14,7 +14,7 @@
                 'Collegemates! 👋',
                 3000,
               ]" :loop="Infinity" :wrapper="'h2'"></typical>
- </p>
+            </p>
           </article>
           <div class="column">
             <LoginCard />

@@ -4,7 +4,7 @@
       <div class="navbar-brand pl-5">
         <a class="navbar-item" @click.prevent>
           <router-link to="/">
-            <img src="../assets/icon-left-font-monochrome-white.png" /></router-link>
+            <img src="../assets/icon-left-font-monochrome-white.png"  alt="Groupomaniaa" /></router-link>
         </a>
         <!-- @click handler goes here, make sure to scroll a bit to see it. -->
         <a :aria-expanded="isActive" role="button" class="navbar-burger" aria-label="menu" data-target="collapse"
