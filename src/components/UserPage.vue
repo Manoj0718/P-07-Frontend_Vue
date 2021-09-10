@@ -22,7 +22,7 @@
         <label class="label has-text-white is-family-code has-text-weight-medium has-text-white">status</label>
         {{ user.published ? "Published" : "Pending" }}
       </div>
-      <div class="buttons mt-2 is-justify-content-center">
+      <div class="buttons mt-2 is-justify-content-center" v-if="NowUser.user.id==this.user.id">
         <button class="button is-info" v-if="user.published" @click="updatePublished(false)">
           Not Published
         </button>
@@ -40,6 +40,10 @@
         </button>
         <p class="has-text-white is-family-code has-text-weight-medium">{{ message }}</p>
       </div>
+       <div v-else>
+          <p class=" is-family-code has-text-weight-medium has-text-white ">Sorry! You are not allowed to perform this
+            event.</p>
+        </div>
     </div>
     <div v-else>
       <p class="has-text-white is-family-code has-text-weight-medium ">No User data Here</p>
@@ -51,6 +55,11 @@
   import UserModifyFunction from "../store/services/user_modify.js";
   export default {
     name: "UserPage",
+    computed: {
+      NowUser() {
+        return this.$store.state.auth.user;
+      },
+    },
     data() {
       return {
         user: null,

@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <nav class="navbar is-black" role="navigation" aria-label="main navigation">
+    <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand pl-5">
         <a class="navbar-item" @click.prevent>
           <router-link to="/">
@@ -17,7 +17,7 @@
       </div>
 
       <!--  //? Start  navigation bar for user NOT logged in-->
-      <div id="collapse" :class="{ 'is-active': isActive }" class="navbar-menu is-black">
+      <div id="collapse" :class="{ 'is-active': isActive }" class="navbar-menu">
         <!-- //* login and signup button //* -->
         <div class="navbar-end pr-5" v-if="!CurrentUser">
           <div class="navbar-item">
@@ -96,9 +96,9 @@
 </script>
 
 <style scoped>
-  @media screen and (max-width: 1023px) {
-    #collapse {
-      background-color: #000000;
-    }
+
+  .navbar,#collapse{
+    background-color: #122441;
   }
+
 </style>

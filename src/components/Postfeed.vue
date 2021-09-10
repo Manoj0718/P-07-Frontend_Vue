@@ -21,11 +21,11 @@
           <div class="card-content">
             <!-- //! named route --// -->
             <!-- //? params: { postId: post.post_id }} u have to use same params in view page -->
-            <p class="is-size-3-desktop is-size-5-mobile is-family-code has-text-weight-medium has-text-white">
-              {{ item.title }}</p>
             <router-link :to="{ name: 'post', params: { postId: item.post_id } }">
               <div class="is-size-4-desktop is-size-6-mobile is-family-code has-text-weight-medium has-text-white"
                 :post_id="item.post_id">
+                 <p class="is-size-3-desktop is-size-5-mobile is-family-code has-text-weight-medium has-text-white">
+              {{ item.title }}</p>
                 <p class="is-size-5">{{ item.content }}</p>
                 <p class="is-size-7">{{ item.created | displayDate }}</p>
                 <br />
