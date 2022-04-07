@@ -1,5 +1,5 @@
 
-Example login - { "user_email": "test01@new.com","user_password": "123456",}
+Example login - { "user_email": "test@test.com","user_password": "123456",}
 
 Backend - https://github.com/Manoj0718/P_7_backend
 
